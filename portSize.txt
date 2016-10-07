@@ -1,0 +1,11 @@
+Port number must be an integer between 1 and 65535
+Usage: setport [OPTION]... [PORT]
+
+-p [PORT], --port [PORT]    sets the port number entered for [PORT] to listen
+-p -e, --port -e            sets the environmental variable PORT to listen
+-p -e [VAR_PORT],           sets the user-defined environmental variable port
+    --port -e [VAR_PORT]      VAR (or other user-defined variable name) to listen
+-!, --about                 display programmer information and exit
+-h, --help, -?              display this help and exit
+-v, --version               output version information and exit
+Process exited with code: 1
