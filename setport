@@ -1,0 +1,3 @@
+#!/bin/bash
+
+~/workspace/portsetter/portsetter.cpp.o $1 $2 $3 $4

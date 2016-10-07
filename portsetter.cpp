@@ -1,13 +1,15 @@
 // Jeremy Warren
 // CS-3370-001
 // Portsetter Project
-// 9/19/2016
+// 10/6/2016
+
 
 #include "messages.h"
 #include <iostream>
 #include <cstring>
 #include <fstream>
 using namespace std;
+
 
 void usage(const string& language) {
     ifstream usageFile("/home/ubuntu/workspace/portsetter/portsetter.usage_" + language + ".txt");
@@ -18,6 +20,7 @@ void usage(const string& language) {
     usageFile.close();
 }
 
+
 void about(const string& language) {
     ifstream aboutFile("/home/ubuntu/workspace/portsetter/portsetter.about_" + language + ".txt");
     char c;
@@ -27,10 +30,12 @@ void about(const string& language) {
     aboutFile.close();
 }
 
+
 int exitStatus(int status, const vector<string>& msg) {
     cout << msg[EXIT_MSG] << status << endl;
     return status;
 }
+
 
 int main(int argc, char* args[]) {
     const string VERSION = "1.1.3a";

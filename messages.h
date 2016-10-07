@@ -1,6 +1,6 @@
 #include <iostream>
-#include <vector>
-//#include <regex>
+#include <cstring>
+#include <regex>
 
 enum {
     LISTENING,
@@ -14,27 +14,26 @@ enum {
     INTEGER_FORMAT
 };
 
-/*
-std::string testEnvVars() {
-    // NEED TO TEST FOR EMPTY STRING, NO ENV VAR, AND OTHER THINGS FIRST
-    int envVar = 1;
-    std::string lang = getenv("LC_ALL");
-    if ((lang[0] >= 'a' && lang[0] <= 'z') &&
-        (lang[1] >= 'a' && lang[1] <= 'a')
-        
-}
-*/
-
 std::string checkLanguage(std::vector<std::string>& msg) {
-    
-    // Note: I spent 3.5 hours trying to get regEx to work on cloud9 but couldn't. One thing in particular,
-    //   I discovered that it would not take the brackets, such as [a-z]. Setting cloud9 to compile with 
-    //   g++-5 didn't work either. My regEx comparison string, which worked just fine in Visual Studio, was: 
-    //   "^[a-z]{2}((_[A-Z]{2})|\\..+)?(\\..+)?"
-
     std::string language = "en"; // default to English
-//    std::string language = testEnvVars();
-    
+    int test = 1;
+    char* envVar;
+    while (test < 5) {
+        if (test == 1) envVar = getenv("LANGUAGE");
+        else if (test == 2) envVar = getenv("LC_ALL");
+        else if (test == 3) envVar = getenv("LC_MESSAGES");
+        else envVar = getenv("LANG");
+        if (envVar == nullptr || !strcmp(envVar, "")) { // environment variable doesn't exist or isn't set
+            ++test;
+            continue;
+        }
+        if (std::regex_match (envVar, std::regex("^[a-z]{2}((_[A-Z]{2})|(\\..+))?(\\..+)?"))) {
+            language = envVar[0];
+            language += envVar[1]; // copy the two letter language code into "language"
+            break; // we've found an acceptable language; no need to continue
+        }
+        ++test;
+    }
     // Spanish messages
     if (language == "es") {
         msg.push_back("Escucha en el puerto ");
@@ -47,7 +46,6 @@ std::string checkLanguage(std::vector<std::string>& msg) {
         msg.push_back("Número de puerto debe ser un número entero entre 1 y ");
         msg.push_back("Número de puerto debe estar en formato de número entero.");
     }
-
     // English messages
     else {
         msg.push_back("Listening on port ");
@@ -60,6 +58,5 @@ std::string checkLanguage(std::vector<std::string>& msg) {
         msg.push_back("Port number must be an integer between 1 and ");
         msg.push_back("Port number must be in integer format.");
     }
-            
     return language;
 }
