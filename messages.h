@@ -1,3 +1,5 @@
+// Language spike for portsetter.cpp
+
 #include <iostream>
 #include <cstring>
 #include <regex>
@@ -28,8 +30,8 @@ std::string checkLanguage(std::vector<std::string>& msg) {
             continue;
         }
         if (std::regex_match (envVar, std::regex("^[a-z]{2}((_[A-Z]{2})|(\\..+))?(\\..+)?"))) {
-            language = envVar[0];
-            language += envVar[1]; // copy the two letter language code into "language"
+            language = envVar[0]; // copy the two letter language code into "language"
+            language += envVar[1]; 
             break; // we've found an acceptable language; no need to continue
         }
         ++test;
@@ -48,6 +50,10 @@ std::string checkLanguage(std::vector<std::string>& msg) {
     }
     // English messages
     else {
+        if (language != "en") {
+            std::cout << "Missing " << language << " translation files. Using English." << std::endl;
+            language = "en";
+        }
         msg.push_back("Listening on port ");
         msg.push_back("Process exited with code: ");
         msg.push_back("First argument must start with a dash.");
