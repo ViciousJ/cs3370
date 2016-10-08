@@ -1,4 +1,8 @@
-// Language spike for portsetter.cpp
+// Jeremy Warren
+// CS-3370-001
+// Portsetter Project
+// 10/7/2016
+// Description: Language spike for portsetter.cpp
 
 #include <iostream>
 #include <cstring>
@@ -29,13 +33,15 @@ std::string checkLanguage(std::vector<std::string>& msg) {
             ++test;
             continue;
         }
-        if (std::regex_match (envVar, std::regex("^[a-z]{2}((_[A-Z]{2})|(\\..+))?(\\..+)?"))) {
+        // compare environment variable to the below regex statement to see if it is a valid language
+        if (std::regex_match (envVar, std::regex("^[a-z]{2}((_[A-Z]{2})|(\\..+))?(\\..+)?"))) { 
             language = envVar[0]; // copy the two letter language code into "language"
             language += envVar[1]; 
             break; // we've found an acceptable language; no need to continue
         }
         ++test;
     }
+    
     // Spanish messages
     if (language == "es") {
         msg.push_back("Escucha en el puerto ");
@@ -48,6 +54,7 @@ std::string checkLanguage(std::vector<std::string>& msg) {
         msg.push_back("Número de puerto debe ser un número entero entre 1 y ");
         msg.push_back("Número de puerto debe estar en formato de número entero.");
     }
+    
     // English messages
     else {
         if (language != "en") {

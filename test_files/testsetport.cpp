@@ -1,8 +1,9 @@
 // Jeremy Warren
 // CS-3370-001
-// Portsetter Project CO1
+// Portsetter Project
 // 10/7/2016
 // Description: Test program for the portsetter/setport program.
+//   Requires the many .txt test files to work properly.
 
 #include <iostream>
 #include <cstring>
@@ -24,8 +25,8 @@ int test(const char* commandLine, const int expectedCode, const char* compFile) 
     int statusCode2 = system(command) / 256;
     if (statusCode2 != 0) cout << "Message test failed: " << commandLine << endl;
     
-    return (statusCode1 || statusCode2) ? 1 : 0; 
     // return 1 if there was an error, or 0 if there were no errors
+    return (statusCode1 || statusCode2) ? 1 : 0; 
 }
 
 int main(int argc, char* args[]) {
