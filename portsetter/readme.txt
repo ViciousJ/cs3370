@@ -39,7 +39,7 @@ HOW TO RUN THE SETPORT TEST
 EDITS
 
 Line 56, 83, 107 with comment /*----Part of code for CO5----*/
-I added several test cases to the testing program (formatted like the others) but had to comment them out as
-the testing program couldn't handle them. It did handle one however that isn't commented out. They have to be run
-manually.
+I added several test cases to the testing program (formatted like the others),
+but had to comment them out as the testing program couldn't handle them. It did
+handle one however that isn't commented out. They have to be run manually.
    
