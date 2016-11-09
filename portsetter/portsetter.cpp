@@ -52,7 +52,8 @@ int main(int argc, char* args[]) {
         usage(lang);
         return exitStatus(1, msg);
     }
-    if ((argc == 4 && strcmp(args[2], "-e")) || argc > 4) { // too many arguments entered
+    //if ((argc == 4 && strcmp(args[2], "-e")) || argc > 4) { // too many arguments entered
+    if ((argc == 4 && strcmp(args[2], "-e")) && (argc == 4 && strcmp(args[2], "--environment")) || argc > 4) {  /*----Part of code for CO5----*/
         cout << msg[TOO_MANY_ARGS] << endl;
         usage(lang);
         return exitStatus(1, msg);
@@ -78,9 +79,10 @@ int main(int argc, char* args[]) {
         return exitStatus(1, msg);
     }
     // case for -e
-    if (argc == 3 && !strcmp(args[2], "-e")) { 
+    // if (argc == 3 && !strcmp(args[2], "-e")) { 
+    if (argc == 3 && (!strcmp(args[2], "-e") || !strcmp(args[2], "--environment"))) { /*----Part of code for CO5----*/
         char* port = getenv("PORT");
-        if (port == nullptr || !strcmp(port, "")) {
+        if (port == nullptr || !strcmp(port, "")) {;
             cout << msg[NO_ENV_VAR] << endl;
             usage(lang);
             return exitStatus(1, msg);
@@ -101,7 +103,8 @@ int main(int argc, char* args[]) {
         return exitStatus(0, msg);
     }
     // case for -e VAR_PORT (user defined environmental variable)
-    if (!strcmp(args[2], "-e")) { 
+    //if (!strcmp(args[2], "-e")) { 
+    if (argc == 4 && (!strcmp(args[2], "-e") || !strcmp(args[2], "--environment"))) { /*----Part of code for CO5----*/
         char* port = getenv(args[3]);
         if (port == nullptr || !strcmp(port, "")) {
             cout << msg[NO_ENV_VAR] << endl;
@@ -122,7 +125,9 @@ int main(int argc, char* args[]) {
         }
         cout << msg[LISTENING] << getenv(args[3]) << endl;
         return exitStatus(0, msg);
-    }    
+    }
+   
+    
     if (args[2][0] == '-') { // possibly a negative number entered
         cout << msg[BAD_PORT_SIZE] << MAX_PORT_NUM << endl;
         usage(lang);
