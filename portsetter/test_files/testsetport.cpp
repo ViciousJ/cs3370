@@ -49,6 +49,15 @@ int main(int argc, char* args[]) {
     //   system to system. Manual testing only for those four success cases. 
     //   However, negative tests can be made, as below.
     
+    //CO5 Postive Test Cases
+    // numErrors += test("setport -p --environment", 0, "listening.txt");
+    // numErrors += test("setport --port --environment", 0, "listening.txt");
+    // numErrors += test("setport -p -e BAR", 0, "listening.txt");
+    // numErrors += test("setport --port -e BAR", 0, "listening.txt");
+    // numErrors += test("setport -p --environment BAR", 0, "listening.txt");
+    // numErrors += test("setport --port --environment BAR", 0, "listening.txt");
+    // numErrors += test("setport -p -e BAR", 0, "listening.txt");
+    
     // NEGATIVE TESTS
     numErrors += test("setport help", 1, "noDash.txt");
     numErrors += test("setport -help", 1, "invalidFlag.txt");
@@ -89,6 +98,14 @@ int main(int argc, char* args[]) {
     numErrors += test("setport --port -e 256", 1, "noEnvVar.txt");
     numErrors += test("setport --port e", 1, "integerFormat.txt");
     numErrors += test("setport -p -e Pants", 1, "noEnvVar.txt");
+    
+    
+    //CO5 Negative Test Cases
+    //numErrors += test("setport -p -en", 1, "invalidFlag.txt");
+    //numErrors += test("setport -p --envirnment", 1, "invalidFlag.txt");
+    numErrors += test("setport --port --environment non_existant_env_var", 1, "noEnvVar.txt");
+    //numErrors += test("setport -p --environment BAR 123", 1, "tooMany.txt");
+    
     
     cout << "Test complete. " << numErrors << " errors were found.\n";
     return 0;
